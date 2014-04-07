@@ -1,23 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package jenkins;
 
-/**
- *
- * @author Matthew
- */
-public class Jenkins {
+import org.junit.Test;
+import static org.junit.Assert.*;
 
+public class Jenkins {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("hello world");
+    @Test
+    public static void TestCalc()
+    {
+        Calculator calc = new Calculator();
+        //assertEquals("4/0 = ", -999, calc.divide(4,0));
+        assertEquals("Hello World!\n", calc.getMessage(1));
+        //calc.divide(4,0);
     }
     
+    @Test
+    //public static void 
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+        /*Calculator calc = new Calculator();
+        
+        System.out.println(calc.divide(4,0));*/
+        TestCalc();
+    }
 }
