@@ -34,4 +34,4 @@ public class CalcMain {
         System.out.println(calc.divide(4,0));*/
         TestCalc();
     }
-    
+}
