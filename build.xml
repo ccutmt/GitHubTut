@@ -90,5 +90,30 @@
             </batchtest>
         </junit>
     </jacoco:coverage>
-</target>
+    </target>
+    
+    <target name="report" depends="test">
+        <!--  Step 3: Create coverage report  -->
+        <jacoco:report>
+            <!--
+            This task needs the collected execution data and ... 
+            -->
+            <executiondata>
+                <file file="target/jacoco.exec"/>
+            </executiondata>
+            <!--  the class files and optional source files ...  -->
+            <structure name="JaCoCo Ant Example">
+            <classfiles>
+                <fileset dir="build/classes"/>
+            </classfiles>
+            <sourcefiles encoding="UTF-8">
+                <fileset dir="${src.dir}"/>
+            </sourcefiles>
+            </structure>
+            <!--  to produce reports in different formats.  -->
+            <html destdir="coverage"/>
+            <xml destfile="coverage/report.xml"/>
+        </jacoco:report>
+    </target>
+    
 </project>
