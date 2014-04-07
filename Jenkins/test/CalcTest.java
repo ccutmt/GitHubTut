@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import jenkins.Calculator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,6 +34,15 @@ public class CalcTest {
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void TestCalc()
+    {
+        Calculator calc = new Calculator();
+        //assertEquals("4/0 = ", -999, calc.divide(4,0));
+        assertEquals("Hello World!\n", calc.getMessage(1));
+        //calc.divide(4,0);
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
