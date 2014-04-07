@@ -7,16 +7,17 @@ public class Jenkins {
     /**
      * @param args the command line arguments
      */
+    
     @Test
     public static void TestCalc()
     {
         Calculator calc = new Calculator();
         //assertEquals("4/0 = ", -999, calc.divide(4,0));
-        assertEquals("Hello World!\n", calc.getMessage(1));
+        assertEquals("Hello World!\nHello World!", calc.getMessage(1));
         //calc.divide(4,0);
     }
     
-    @Test
+    //@Test
     //public static void 
     
     public static void main(String[] args) {
