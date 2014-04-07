@@ -74,4 +74,21 @@
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="lib/jacocoant.jar"/>
     </taskdef>
+    
+    <target name="test" depends="init">
+    <jacoco:coverage destfile="target/jacoco.exec">
+        <junit printsummary="yes" haltonfailure="yes" fork="yes" forkmode="once">
+            <classpath path="lib/junit-4.10.jar"/>
+            <classpath path="build/test/classes"/>
+            <classpath path="build/classes"/>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <batchtest fork="true" todir="target/test-reports">
+                <fileset dir="test">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </jacoco:coverage>
+</target>
 </project>
