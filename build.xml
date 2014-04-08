@@ -106,9 +106,9 @@
 
 <target name="test" depends="init">
 	<junit printsummary="yes" fork="true">
-        <test name="Test" todir="${coverage.dir}">
-            <formatter type="xml"/>
-        </test>
+        <batchtest>
+    		<fileset dir="${instrumented.dir}" includes="**/*.class" />
+	</batchtest>
         <classpath>
                 <path refid="emma.lib" />
                 <pathelement location="${instrumented.dir}"/>
