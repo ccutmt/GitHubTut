@@ -88,15 +88,15 @@
 
 <target name="emma" description="turns on EMMA's instrumentation/reporting" >
     <property name="emma.enabled" value="true" />
-    <mkdir dir="${out.instr.dir}" />
+    <mkdir dir="${instrumented.dir}" />
     <property name="emma.filter" value="" />
  </target>
 
 <target name="test" depends="init, compile" description="Run JUnit Test cases under emma environment">
     <!-- Emma instrumentation -->
-    <emma enabled="${emma.enabled}" verbosity="verbose">
+    <emma enabled="true" verbosity="verbose">
         <instr instrpath="${class.dir}"
-                     destdir="${out.instr.dir}"        
+                     destdir="${instrumented.dir}"        
                      metadatafile="${coverage.dir}/metadata.em"
                      merge="true" 
                      mode="copy">
@@ -105,7 +105,7 @@
     </emma>
 
 
-    <emma enabled="${emma.enabled}" verbosity="verbose">
+    <emma enabled="true" verbosity="verbose">
         <report>
             <sourcepath>
                 <dirset dir="${basedir}">
@@ -118,8 +118,8 @@
                 <include name="*.ec"/>
             </fileset>
         <xml outfile="${coverage.dir}/report.xml" />
-        <txt outfile="${coverage.report.dir}/report.txt" />
-        <html outfile="${coverage.report.dir}/report.html" />
+        <txt outfile="${coverage.dir}/report.txt" />
+        <html outfile="${coverage.dir}/report.html" />
         </report>
     </emma>
 
