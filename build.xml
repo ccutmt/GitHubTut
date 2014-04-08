@@ -129,7 +129,7 @@
 			<formatter type="xml" />
 			<batchtest todir="${test.report.dir}">
 				<fileset dir="${test.dir}">
-					<include name="**/*Test*.java" />
+					<j2seproject3:test testincludes="**/*Test.java"/>
 				</fileset>
 			</batchtest>
 		</junit>
