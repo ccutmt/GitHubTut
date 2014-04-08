@@ -78,7 +78,7 @@
 	<property name="test.dir" location="test" />
 
 	<property name="build.dir" location="build/classes/jenkins" />
-	<property name="build.test.dir" location="build/test" />
+	<property name="build.test.dir" location="build/empty" />
 
 	<!-- Variables used for JUnit testin -->
 
