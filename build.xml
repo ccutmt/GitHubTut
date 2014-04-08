@@ -75,10 +75,10 @@
 	<!-- The value of a property is accessed via ${} -->
 	
 	<property name="src.dir" location="src/jenkins" />
-	<property name="test.dir" location="tests" />
+	<property name="test.dir" location="test" />
 
-	<property name="build.dir" location="build" />
-	<property name="build.test.dir" location="bin/tests" />
+	<property name="build.dir" location="build/classes/jenkins" />
+	<property name="build.test.dir" location="build/classes/jenkins" />
 
 	<!-- Variables used for JUnit testin -->
 
@@ -93,18 +93,18 @@
 
 
 	<!-- Deletes the existing build, docs and dist directory-->
-	<target name="clean">
+	<!--<target name="clean">
 		<delete dir="${build.dir}" />
 		<delete dir="${test.report.dir}" />
-	</target>
+	</target>-->
 
 	<!-- Creates the  build, docs and dist directory-->
-	<target name="makedir">
+	<!--<target name="makedir">
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${build.test.dir}" />
 		<mkdir dir="${test.report.dir}" />
 		<mkdir dir="${test.dir}" />
-	</target>
+	</target>-->
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
 	<!--<target name="compile" depends="clean, makedir">
