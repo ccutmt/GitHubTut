@@ -84,12 +84,14 @@
    
  <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
+<target name="before">
 <emma enabled="true">
      <instr instrpath="${class.dir}" destdir="${instrumented.dir}" metadatafile="${coverage.dir}/metadata.emma" merge="true">
          <filter excludes="au.com.jenisys.view.*"/>
      </instr>
  </emma>
-
+</target>
+<target name="after">
  <emma enabled="true" >
      <report sourcepath="${src.dir}" >
          <fileset dir="${coverage.dir}" >
@@ -99,5 +101,5 @@
          <xml outfile="${coverage.dir}/coverage.xml" depth="method"/>
      </report>
  </emma>
-
+</target>
 </project>
