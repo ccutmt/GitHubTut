@@ -71,6 +71,71 @@
 
     -->
     
+<property name="coverage.dir" value="${basedir}/coverage" />
+ <property name="emma.dir" value="${basedir}/emma" />
+ <property name="src.dir" value="${basedir}/src/"/>
+ <property name="class.dir" value="${basedir}/build/test/classes/"/>
+ <property name="instrumented.dir" value="${basedir}/inst/"/>
+ <path id="emma.lib">
+     <fileset dir="${emma.dir}/lib">
+         <include name="*.jar"/>
+     </fileset>
+ </path>
+   
+ <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
+  <!--Target and task for EMMA -->
+<taskdef resource="emma_ant.properties" classpathref="Emma.libraryclasspath" />
+<target name="emma" description="turns on EMMA's instrumentation/reporting" >
+    <property name="emma.enabled" value="true" />
+    <mkdir dir="${out.instr.dir}" />
+    <property name="emma.filter" value="" />
+ </target>
+
+<target name="test" depends="init, compile" description="Run JUnit Test cases under emma environment">
+    <!-- Emma instrumentation -->
+    <emma enabled="${emma.enabled}" verbosity="verbose">
+        <instr instrpath="${class.dir}"
+                     destdir="${out.instr.dir}"        
+                     metadatafile="${coverage.dir}/metadata.em"
+                     merge="true" 
+                     mode="copy">
+            <filter value="${emma.filter}" />
+        </instr>
+    </emma>
+
+    <!-- JUnit Start -->
+    <junit printsummary="yes" fork="yes">
+        <test name="com.hf.platform.authorizer.WebTxnAuthorizerTest" todir="${test.report.dir}">
+            <formatter type="xml"/>
+        </test>
+        <classpath>
+            <path refid="HFPlatformWeb.classpath"/>
+            <path refid="Emma.libraryclasspath"/>
+        </classpath>
+        <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
+        <jvmarg value="-Demma.coverage.out.merge=false" />
+    </junit>
+    <!-- Junit End -->
+
+    <emma enabled="${emma.enabled}" verbosity="verbose">
+        <report>
+            <sourcepath>
+                <dirset dir="${basedir}">
+                    <include name="src"/>
+                    <include name="test-src"/>
+                </dirset>
+             </sourcepath>
+            <fileset dir="${coverage.dir}">
+                <include name="*.em"/>
+                <include name="*.ec"/>
+            </fileset>
+        <xml outfile="${coverage.report.dir}/report.xml" />
+        <txt outfile="${coverage.report.dir}/report.txt" />
+        <html outfile="${coverage.report.dir}/report.html" />
+        </report>
+    </emma>
+
+</target>
 
 </project>
