@@ -70,29 +70,5 @@
     nbproject/build-impl.xml file. 
 
     -->
-    
-<!-- root directory for the example source code: --> 
-  <property name="src.dir" value="${basedir}/src" />
-
-  <!-- javac class output directory: -->
-  <property name="out.dir" value="${basedir}/coverage/" />
-
-<target name="init" >
-    <mkdir dir="${out.dir}" />
-    <path id="run.classpath" >
-      <pathelement location="${out.dir}" />
-    </path>
-  </target>
-
-  <target name="compile" depends="init" description="compiles the example source code" >
-    <javac debug="on" srcdir="${src.dir}" destdir="${out.dir}" />
-  </target>
-
-  <target name="run" depends="init, compile" description="runs the examples" >
-    <java classname="Main"
-          classpathref="run.classpath"
-    >
-    </java>
-  </target>
 
 </project>
