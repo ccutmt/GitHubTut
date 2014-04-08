@@ -103,6 +103,7 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${build.test.dir}" />
 		<mkdir dir="${test.report.dir}" />
+		<mkdir dir="${test.dir}" />
 	</target>
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
