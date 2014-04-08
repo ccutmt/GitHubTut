@@ -104,19 +104,6 @@
         </instr>
     </emma>
 
-    <!-- JUnit Start -->
-    <junit printsummary="yes" fork="yes">
-        <test name="com.hf.platform.authorizer.WebTxnAuthorizerTest" todir="${test.report.dir}">
-            <formatter type="xml"/>
-        </test>
-        <classpath>
-            <path refid="HFPlatformWeb.classpath"/>
-            <path refid="Emma.libraryclasspath"/>
-        </classpath>
-        <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
-        <jvmarg value="-Demma.coverage.out.merge=false" />
-    </junit>
-    <!-- Junit End -->
 
     <emma enabled="${emma.enabled}" verbosity="verbose">
         <report>
@@ -130,7 +117,7 @@
                 <include name="*.em"/>
                 <include name="*.ec"/>
             </fileset>
-        <xml outfile="${coverage.report.dir}/report.xml" />
+        <xml outfile="${coverage.dir}/report.xml" />
         <txt outfile="${coverage.report.dir}/report.txt" />
         <html outfile="${coverage.report.dir}/report.html" />
         </report>
