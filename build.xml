@@ -118,6 +118,40 @@
 
 	</target>-->
 
+
+ <property name="emma.dir" value="${basedir}/emma/lib/" />
+ <property name="src.dir" value="${basedir}/src/jenkins/"/>
+ <property name="class.dir" value="${basedir}/build/classes/jenkins/"/>
+ <property name="instrumented.dir" value="${basedir}/inst/"/>
+ <path id="emma.lib">
+     <fileset dir="${emma.dir}">
+         <include name="*.jar"/>
+     </fileset>
+ </path>
+ 
+	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+
+<target name="before">
+<emma enabled="true">
+     <instr instrpath="${class.dir}" destdir="${instrumented.dir}" metadatafile="${test.dir}/metadata.emma" merge="true">
+         <filter excludes="au.com.jenisys.view.*"/>
+     </instr>
+ </emma>
+</target>
+
+<target name="after">
+ <emma enabled="true" >
+     <report sourcepath="${src.dir}" >
+         <fileset dir="${test.dir}" >
+             <include name="*.emma" />
+         </fileset>
+
+         <xml outfile="${test.dir}/coverage.xml" depth="method"/>
+     </report>
+ </emma>
+</target>
+	
+	
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
 	<target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test">
