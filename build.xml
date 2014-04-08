@@ -70,51 +70,6 @@
     nbproject/build-impl.xml file. 
 
     -->
-
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-        <classpath path="lib/jacocoant.jar"/>
-    </taskdef>
-    
-    <target name="test" depends="init">
-    <jacoco:coverage destfile="target/jacoco.exec">
-        <junit printsummary="yes" haltonfailure="yes" fork="yes" forkmode="once">
-            <classpath path="lib/junit-4.10.jar"/>
-            <classpath path="build/test/classes"/>
-            <classpath path="build/classes"/>
-            <formatter type="plain"/>
-            <formatter type="xml"/>
-            <batchtest fork="true" todir="target/test-reports">
-                <fileset dir="test">
-                    <include name="**/*Test.java"/>
-                </fileset>
-            </batchtest>
-        </junit>
-    </jacoco:coverage>
-    </target>
-    
-    <target name="report" depends="test">
-        <!--  Step 3: Create coverage report  -->
-        <jacoco:report>
-            <!--
-            This task needs the collected execution data and ... 
-            -->
-            <executiondata>
-                <file file="target/jacoco.exec"/>
-            </executiondata>
-            <!--  the class files and optional source files ...  -->
-            <structure name="JaCoCo Ant Example">
-            <classfiles>
-                <fileset dir="build/classes"/>
-            </classfiles>
-            <sourcefiles encoding="UTF-8">
-                <fileset dir="${src.dir}"/>
-            </sourcefiles>
-            </structure>
-            <!--  to produce reports in different formats.  -->
-            <html destdir="coverage"/>
-            <xml destfile="coverage/report.xml"/>
-        </jacoco:report>
-    </target>
     
 <property name="coverage.dir" value="${basedir}/coverage" />
  <property name="emma.dir" value="/usr/bin/emma" />
