@@ -71,54 +71,71 @@
 
     -->
     
-<property name="coverage.dir" value="${basedir}/coverage/" />
- <property name="emma.dir" value="${basedir}/emma/lib/" />
- <property name="src.dir" value="${basedir}/src/jenkins/"/>
- <property name="class.dir" value="${basedir}/build/classes/jenkins/"/>
- <property name="instrumented.dir" value="${basedir}/inst/"/>
- <path id="emma.lib">
-     <fileset dir="${emma.dir}">
-         <include name="*.jar"/>
-     </fileset>
- </path>
-   
- <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+	<!-- Sets variables which can later be used. -->
+	<!-- The value of a property is accessed via ${} -->
+	
+	<property name="src.dir" location="src/jenkins" />
+	<property name="test.dir" location="tests" />
 
-<target name="before">
-<emma enabled="true">
-     <instr instrpath="${class.dir}" destdir="${instrumented.dir}" metadatafile="${coverage.dir}/metadata.emma" merge="true">
-         <filter excludes="au.com.jenisys.view.*"/>
-     </instr>
- </emma>
-</target>
+	<property name="build.dir" location="build" />
+	<property name="build.test.dir" location="bin/tests" />
 
-<target name="after">
- <emma enabled="true" >
-     <report sourcepath="${src.dir}" >
-         <fileset dir="${coverage.dir}" >
-             <include name="*.emma" />
-         </fileset>
+	<!-- Variables used for JUnit testin -->
 
-         <xml outfile="${coverage.dir}/coverage.xml" depth="method"/>
-     </report>
- </emma>
-</target>
+	<property name="test.report.dir" location="testreport" />
 
-<path id="project.classpath">
-	<pathelement location="${basedir}/build" />
-	<pathelement location="emma.lib" />
-</path>
+	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
+	<path id="junit.class.path">
+		<pathelement location="lib/junit-4.10.jar" />
+		<!--<pathelement location="lib/hamcrest-core-1.3.jar" />
+		<pathelement location="${build.dir}" />-->
+	</path>
 
-<target name="test" depends="init">
-	<junit printsummary="yes" fork="yes" haltonfailure="yes">
-		<formatter type="plain"/>
-			<batchtest fork="true">
-				<fileset dir="${coverage.dir}">
-					<include name="**/*Test*.java"/>
+
+	<!-- Deletes the existing build, docs and dist directory-->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${test.report.dir}" />
+	</target>
+
+	<!-- Creates the  build, docs and dist directory-->
+	<target name="makedir">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.test.dir}" />
+		<mkdir dir="${test.report.dir}" />
+	</target>
+
+	<!-- Compiles the java code (including the usage of library for JUnit -->
+	<target name="compile" depends="clean, makedir">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath refid="junit.class.path" />
+		</javac>
+
+		<javac srcdir="${test.dir}" destdir="${build.test.dir}">
+			<classpath refid="junit.class.path" />
+		</javac>
+
+	</target>
+
+	<!-- Run the JUnit Tests -->
+	<!-- Output is XML, could also be plain-->
+	<target name="junit" depends="compile">
+		<junit printsummary="on" fork="true" haltonfailure="yes">
+			<classpath refid="junit.class.path" />
+			<classpath>
+			    <pathelement location="${build.test.dir}"/>
+			  </classpath>
+			<formatter type="xml" />
+			<batchtest todir="${test.report.dir}">
+				<fileset dir="${test.dir}">
+					<include name="**/*Test*.java" />
 				</fileset>
 			</batchtest>
-		<classpath refid="${project.classpath}" />
-	</junit>
-</target>
+		</junit>
+	</target>
+
+	<target name="main" depends="compile, junit">
+		<description>Main target</description>
+	</target>
 
 </project>
