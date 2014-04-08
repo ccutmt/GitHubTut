@@ -118,7 +118,24 @@
 
 	</target>-->
 
-
+	<!-- Run the JUnit Tests -->
+	<!-- Output is XML, could also be plain-->
+	<!--<target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test">
+		<junit printsummary="on" fork="true" haltonfailure="no">
+			<classpath refid="junit.class.path" />
+			<classpath>
+			    <pathelement location="${build.test.dir}"/>
+			  </classpath>
+			<formatter type="xml" />
+			<batchtest todir="${test.report.dir}">
+				<fileset dir="${test.dir}">
+					<include name="**/*Test*.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>-->
+	
+	<property name="coverage.dir" value="${basedir}/coverage/" />
  <property name="emma.dir" value="${basedir}/emma/lib/" />
  <property name="src.dir" value="${basedir}/src/jenkins/"/>
  <property name="class.dir" value="${basedir}/build/classes/jenkins/"/>
@@ -128,12 +145,12 @@
          <include name="*.jar"/>
      </fileset>
  </path>
- 
-	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+   
+ <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
 <target name="before">
 <emma enabled="true">
-     <instr instrpath="${class.dir}" destdir="${instrumented.dir}" metadatafile="${test.dir}/metadata.emma" merge="true">
+     <instr instrpath="${class.dir}" destdir="${instrumented.dir}" metadatafile="${coverage.dir}/metadata.emma" merge="true">
          <filter excludes="au.com.jenisys.view.*"/>
      </instr>
  </emma>
@@ -142,21 +159,30 @@
 <target name="after">
  <emma enabled="true" >
      <report sourcepath="${src.dir}" >
-         <fileset dir="${test.dir}" >
+         <fileset dir="${coverage.dir}" >
              <include name="*.emma" />
          </fileset>
 
-         <xml outfile="${test.dir}/coverage.xml" depth="method"/>
+         <xml outfile="${coverage.dir}/coverage.xml" depth="method"/>
      </report>
  </emma>
 </target>
-	
-	
-	<!-- Run the JUnit Tests -->
-	<!-- Output is XML, could also be plain-->
-	<target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test">
-		<jvmarg value="-Demma.coverage.out.file=${test.dir}/coverage.ec" />
-        <jvmarg value="-Demma.coverage.out.merge=false" />
-	</target>
+
+<path id="project.classpath">
+	<pathelement location="${basedir}/build" />
+	<pathelement location="emma.lib" />
+</path>
+
+<target name="test" depends="init">
+	<junit printsummary="yes" fork="yes" haltonfailure="yes">
+		<formatter type="plain"/>
+			<batchtest fork="true">
+				<fileset dir="${coverage.dir}">
+					<include name="**/*Test*.java"/>
+				</fileset>
+			</batchtest>
+		<classpath refid="${project.classpath}" />
+	</junit>
+</target>
 
 </project>
