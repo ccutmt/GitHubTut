@@ -81,6 +81,12 @@
          <include name="*.jar"/>
      </fileset>
  </path>
+
+<path id="src.classpath">
+     <fileset dir="${class.dir}">
+         <include name="*.class"/>
+     </fileset>
+ </path>
    
  <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
@@ -111,7 +117,7 @@
         </test>
         <classpath>
             <path refid="emma.lib"/>
-            <path refid="${class.dir}"/>
+            <path refid="src.classpath"/>
         </classpath>
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
         <jvmarg value="-Demma.coverage.out.merge=false" />
