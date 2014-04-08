@@ -22,7 +22,7 @@ public class CalcTest {
     
     @BeforeClass
     public static void setUpClass() {
-    }
+    }cad
     
     @AfterClass
     public static void tearDownClass() {
