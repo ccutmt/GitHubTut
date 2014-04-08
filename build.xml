@@ -104,20 +104,21 @@
  </emma>
 </target>
 
+<path id="project.classpath">
+	<pathelement location="${basedir}/build" />
+	<pathelement location="emma.lib" />
+</path>
+
 <target name="test" depends="init">
-	<junit printsummary="yes" fork="true">
-
-        <classpath>
-            <pathelement location="${class.dir}" />
-            <pathelement location="${coverage.dir}" />
-            <path refid="emma.lib" />
-        </classpath>
-        <formatter type="plain" usefile="false" />
-        <test name="Test" />
-        <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
-        <jvmarg value="-Demma.coverage.out.merge=false" />
-
-    </junit>
+	<junit printsummary="yes" fork="yes" haltonfailure="yes">
+		<formatter type="plain"/>
+			<batchtest fork="true">
+				<fileset dir="${coverage}">
+					<include name="**/*Test*.java"/>
+				</fileset>
+			</batchtest>
+		<classpath refid="${project.classpath}" />
+	</junit>
 </target>
 
 </project>
