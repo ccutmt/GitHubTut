@@ -106,18 +106,17 @@
 
 <target name="test" depends="init">
 	<junit printsummary="yes" fork="true">
-        <batchtest>
-    		<fileset dir="${instrumented.dir}" includes="**/*Test.class" />
-	</batchtest>
+
         <classpath>
-                <path refid="emma.lib" />
-                <pathelement location="${instrumented.dir}"/>
-                <fileset dir="${basedir}/lib">
-                   <include name="**/*.jar"/>
-                </fileset>
+            <pathelement location="${class.dir}" />
+            <pathelement location="${coverage.dir}" />
+            <path refid="emma.dir" />
         </classpath>
+        <formatter type="plain" usefile="false" />
+        <test name="Test" />
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
         <jvmarg value="-Demma.coverage.out.merge=false" />
+
     </junit>
 </target>
 
