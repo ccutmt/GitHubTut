@@ -81,12 +81,6 @@
          <include name="*.jar"/>
      </fileset>
  </path>
-
-<path id="out.classpath">
-     <fileset dir="${basedir}/dist">
-         <pathelement location="${coverage.dir}" />
-     </fileset>
- </path>
    
  <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
@@ -116,9 +110,11 @@
             <formatter type="xml"/>
         </test>
         <classpath>
-	    <pathelement location="${instrumented.dir}"/>
-            <path refid="emma.lib"/>
-            <path refid="out.classpath"/>
+                <path refid="emma.lib" />
+                <pathelement location="${instrumented.dir}"/>
+                <fileset dir="${basedir}/lib">
+                   <include name="**/*.jar"/>
+                </fileset>
         </classpath>
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
         <jvmarg value="-Demma.coverage.out.merge=false" />
