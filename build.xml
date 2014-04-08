@@ -112,7 +112,7 @@
 
 <target name="test" depends="init">
 	<junit printsummary="yes" fork="true">
-        <test name="com.hf.platform.authorizer.WebTxnAuthorizerTest" todir="${coverage.dir}">
+        <test name="com.hf.platform.authorizer.WebTxnAuthorizerTest" todir="${instrumented.dir}">
             <formatter type="xml"/>
         </test>
         <classpath>
