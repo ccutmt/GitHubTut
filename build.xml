@@ -71,27 +71,6 @@
 
     -->
     
-<property name="coverage.dir" value="${basedir}/coverage" />
- <property name="emma.dir" value="${basedir}/emma" />
- <property name="src.dir" value="${basedir}/src/"/>
- <property name="class.dir" value="${basedir}/build/test/classes/"/>
- <property name="instrumented.dir" value="${basedir}/inst/"/>
- <path id="emma.lib">
-     <fileset dir="${emma.dir}/lib">
-         <include name="*.jar"/>
-     </fileset>
- </path>
-   
- <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
-  <emma enabled="true" >
-      <report >
-        <!-- collect all EMMA data dumps (metadata and runtime): -->
-        <infileset dir="${coverage.dir}" includes="*.em, *.ec" />
-
-        <txt />
-        <xml />
-      </report>
-    </emma>
 
 </project>
