@@ -82,8 +82,8 @@
      </fileset>
  </path>
 
-<path id="src.classpath">
-     <fileset dir="${class.dir}">
+<path id="ins.classpath">
+     <fileset dir="${instrumented.dir}">
          <include name="*.class"/>
      </fileset>
  </path>
@@ -117,7 +117,7 @@
         </test>
         <classpath>
             <path refid="emma.lib"/>
-            <path refid="${instrumented.dir}"/>
+            <path refid="ins.classpath"/>
         </classpath>
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
         <jvmarg value="-Demma.coverage.out.merge=false" />
