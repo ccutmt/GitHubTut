@@ -82,7 +82,7 @@
 
 	<!-- Variables used for JUnit testin -->
 
-	<property name="test.report.dir" location="testreport" />
+	<property name="test.report.dir" location="test" />
 
 	<!-- Define the classpath which includes the junit.jar and the classes after compiling-->
 	<path id="junit.class.path">
