@@ -111,13 +111,13 @@
 </target>
 
 <target name="test" depends="init">
-	<junit printsummary="yes" fork="yes">
+	<junit printsummary="yes" fork="true">
         <test name="com.hf.platform.authorizer.WebTxnAuthorizerTest" todir="${coverage.dir}">
             <formatter type="xml"/>
         </test>
         <classpath>
             <path refid="emma.lib"/>
-            <path refid="src.classpath"/>
+            <path refid="${instrumented.dir}"/>
         </classpath>
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
         <jvmarg value="-Demma.coverage.out.merge=false" />
