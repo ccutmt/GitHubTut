@@ -110,7 +110,7 @@
             <formatter type="xml"/>
         </test>
         <classpath>
-            <path refid="${emma.dir}"/>
+            <path refid="${emma.lib}"/>
             <path refid="${class.dir}"/>
         </classpath>
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
