@@ -115,10 +115,9 @@
         <test name="Test" todir="${coverage.dir}">
             <formatter type="xml"/>
         </test>
-	<pathelement location="${instrumented.dir}"/>
         <classpath>
+	    <pathelement location="${instrumented.dir}"/>
             <path refid="emma.lib"/>
-            <path refid="dist.classpath"/>
         </classpath>
         <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.ec" />
         <jvmarg value="-Demma.coverage.out.merge=false" />
