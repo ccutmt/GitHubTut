@@ -85,7 +85,7 @@
  <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
   <!--Target and task for EMMA -->
-<taskdef resource="emma_ant.properties" classpathref="${basedir}/emma/lib" />
+
 <target name="emma" description="turns on EMMA's instrumentation/reporting" >
     <property name="emma.enabled" value="true" />
     <mkdir dir="${out.instr.dir}" />
