@@ -107,7 +107,7 @@
 <target name="test" depends="init">
 	<junit printsummary="yes" fork="true">
         <batchtest>
-    		<fileset dir="${instrumented.dir}" includes="**/*.class" />
+    		<fileset dir="${instrumented.dir}" includes="**/*Test.class" />
 	</batchtest>
         <classpath>
                 <path refid="emma.lib" />
