@@ -121,18 +121,8 @@
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
 	<target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test">
-		<junit printsummary="on" fork="true" haltonfailure="no">
-			<classpath refid="junit.class.path" />
-			<classpath>
-			    <pathelement location="${build.test.dir}"/>
-			  </classpath>
-			<formatter type="xml" />
-			<batchtest todir="${test.report.dir}">
-				<fileset dir="${test.dir}">
-					<j2seproject3:test testincludes="**/*Test.java"/>
-				</fileset>
-			</batchtest>
-		</junit>
+		<jvmarg value="-Demma.coverage.out.file=${test.dir}/coverage.ec" />
+        <jvmarg value="-Demma.coverage.out.merge=false" />
 	</target>
 
 </project>
