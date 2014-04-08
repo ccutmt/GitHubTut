@@ -120,7 +120,7 @@
 
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
-	<target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test"/>>
+	<target depends="init,compile-test,-pre-test-run,-do-test-run,test-report,-post-test-run,-test-browse" description="Run unit tests." name="test"/>
 		<junit printsummary="on" fork="true" haltonfailure="no">
 			<classpath refid="junit.class.path" />
 			<classpath>
