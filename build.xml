@@ -107,7 +107,7 @@
 	</target>
 
 	<!-- Compiles the java code (including the usage of library for JUnit -->
-	<target name="compile" depends="clean, makedir">
+	<!--<target name="compile" depends="clean, makedir">
 		<javac srcdir="${src.dir}" destdir="${build.dir}">
 			<classpath refid="junit.class.path" />
 		</javac>
@@ -116,7 +116,7 @@
 			<classpath refid="junit.class.path" />
 		</javac>
 
-	</target>
+	</target>-->
 
 	<!-- Run the JUnit Tests -->
 	<!-- Output is XML, could also be plain-->
